@@ -1,0 +1,59 @@
+<mat-card class="booking-list-card">
+  <mat-card-title>Lista Prenotazioni</mat-card-title>
+
+  <mat-card-content>
+    <div class="button-container">
+      <a routerLink="/nuova">
+        <button mat-raised-button color="primary" class="modern-button">
+          <mat-icon>add</mat-icon>
+          Nuova prenotazione
+        </button>
+      </a>
+    </div>
+
+    <div class="order-container">
+      <label for="orderBy">Ordina per:</label>
+      <select
+        id="orderBy"
+        [(ngModel)]="orderBy"
+        (change)="loadPrenotazioni()"
+        class="modern-button"
+      >
+        <option value="nome">Nome</option>
+        <option value="giorno">Giorno</option>
+      </select>
+    </div>
+
+    <div class="grid-container" *ngIf="prenotazioni.length > 0">
+      <mat-card class="prenotazione-card" *ngFor="let p of prenotazioni" (click)="editPrenotazione(p)" style="cursor: pointer;">
+        <ng-container *ngIf="orderBy === 'giorno'; else orderByNome">
+          <mat-card-header>
+            <mat-card-title>{{ p.giorno | date : "dd/MM/yyyy" }}</mat-card-title>
+            <mat-card-subtitle>{{ p.ora }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p><strong>Nome:</strong> {{ p.nome }}</p>
+            <p><strong>Email:</strong> {{ p.email }}</p>
+            <p><strong>Telefono:</strong> {{ p.telefono }}</p>
+            <p><strong>Note:</strong> {{ p.note }}</p>
+          </mat-card-content>
+        </ng-container>
+
+        <ng-template #orderByNome>
+          <mat-card-header>
+            <mat-card-title>{{ p.nome }}</mat-card-title>
+            <mat-card-subtitle>{{ p.email }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p><strong>Data:</strong> {{ p.giorno | date : "dd/MM/yyyy" }}</p>
+            <p><strong>Ora:</strong> {{ p.ora }}</p>
+            <p><strong>Telefono:</strong> {{ p.telefono }}</p>
+            <p><strong>Note:</strong> {{ p.note }}</p>
+          </mat-card-content>
+        </ng-template>
+      </mat-card>
+    </div>
+
+    <p *ngIf="prenotazioni.length === 0">Nessuna prenotazione trovata.</p>
+  </mat-card-content>
+</mat-card>

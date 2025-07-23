@@ -1,0 +1,42 @@
+<div class="form-container">
+  <form (ngSubmit)="onSubmit()" [formGroup]="prenotazioneForm" class="form-card">
+    <h2>Prenotazione</h2>
+
+    <label>Nome</label>
+    <input formControlName="nome" type="text" required />
+    <div class="error" *ngIf="prenotazioneForm.get('nome')?.invalid && prenotazioneForm.get('nome')?.touched">
+      Il nome è obbligatorio.
+    </div>
+
+    <label>Email</label>
+    <input formControlName="email" type="email" required />
+    <div class="error" *ngIf="prenotazioneForm.get('email')?.invalid && prenotazioneForm.get('email')?.touched">
+      Inserisci un'email valida.
+    </div>
+
+    <label>Telefono</label>
+    <input formControlName="telefono"/>
+
+
+    <label>Giorno</label>
+    <input formControlName="giorno" type="date" required [min]="minDate"/>
+    <div class="error" *ngIf="prenotazioneForm.get('giorno')?.invalid && prenotazioneForm.get('giorno')?.touched">
+      Seleziona una data.
+    </div>
+
+    <label>Ora</label>
+    <input formControlName="ora" type="time" required />
+    <div class="error" *ngIf="prenotazioneForm.get('ora')?.invalid && prenotazioneForm.get('ora')?.touched">
+      Seleziona un orario.
+    </div>
+
+    <label>Note</label>
+    <textarea formControlName="note" rows="3"></textarea>
+
+    <div class="button-group">
+  <button type="submit" [disabled]="prenotazioneForm.invalid">Invia</button>
+  <button type="button" class="annulla" (click)="onCancel()">Annulla</button>
+  <button *ngIf="isEditMode" type="button" class="elimina" (click)="onDelete()">Elimina</button>
+</div>
+  </form>
+</div>
