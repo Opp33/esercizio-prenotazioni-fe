@@ -1,4 +1,4 @@
-.prenotazione-list-card {
+.utenti-list-card {
   margin: 2rem auto;
   padding: 1.5rem;
   max-width: 1200px;
@@ -43,7 +43,7 @@
   gap: 20px;
 }
 
-.prenotazione-card {
+.utente-card {
   padding: 1rem;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
@@ -51,7 +51,7 @@
   transition: box-shadow 0.3s ease;
 }
 
-.prenotazione-card:hover {
+.utente-card:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 

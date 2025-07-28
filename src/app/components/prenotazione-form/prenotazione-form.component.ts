@@ -90,14 +90,14 @@ export class PrenotazioneFormComponent implements OnInit {
           .subscribe({
             next: () => {
               alert('Prenotazione aggiornata con successo!');
-              this.router.navigate(['/']);
+              this.router.navigate(['/prenotazioni']);
             },
           });
       } else {
         this.prenotazioneService.creaPrenotazione(prenotazioneData).subscribe({
           next: () => {
             alert('Prenotazione creata con successo!');
-            this.router.navigate(['/']);
+            this.router.navigate(['/prenotazioni']);
           },
         });
       }
@@ -105,7 +105,7 @@ export class PrenotazioneFormComponent implements OnInit {
   }
 
   onCancel(): void {
-    this.router.navigate(['/']);
+    this.router.navigate(['/prenotazioni']);
   }
 
   onDelete(): void {
@@ -117,7 +117,7 @@ export class PrenotazioneFormComponent implements OnInit {
         .eliminaPrenotazione(this.prenotazioneId)
         .subscribe({
           next: () => {
-            this.router.navigate(['/']);
+            this.router.navigate(['/prenotazioni']);
           },
         });
     }

@@ -24,6 +24,6 @@ export class PrenotazioneListComponent implements OnInit {
     }
 
   editPrenotazione(prenotazione: PrenotazioneModel): void {
-    this.router.navigate(['modifica', prenotazione.prenotazioneId]);
+    this.router.navigate(['modifica-prenotazione', prenotazione.prenotazioneId]);
   }
 }

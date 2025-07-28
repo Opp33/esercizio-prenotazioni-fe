@@ -1,0 +1,31 @@
+<mat-card class="utenti-list-card">
+  <div class="top-bar">
+    <h1 class="page-title">Utenti</h1>
+    <button mat-raised-button color="primary" class="modern-button" routerLink="/prenotazioni">
+      Prenotazioni
+    </button>
+  </div>
+
+  <mat-card-content>
+    <div class="button-container">
+      <button mat-raised-button color="primary" class="modern-button" routerLink="/nuovo-utente">
+        <mat-icon>add</mat-icon>
+        Nuovo utente
+      </button>
+    </div>
+
+    <div class="grid-container" *ngIf="utenti.length > 0">
+      <mat-card class="utente-card" *ngFor="let u of utenti" (click)="editUtente(u)" style="cursor: pointer;">
+        <mat-card-header>
+          <mat-card-title>{{ u.cognome }} {{ u.nome }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p><strong>Telefono:</strong> {{ u.telefono }}</p>
+          <p><strong>Email:</strong> {{ u.email }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <p *ngIf="utenti.length === 0">Nessuna prenotazione trovata.</p>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,32 @@
+<div class="form-container">
+  <form (ngSubmit)="onSubmit()" [formGroup]="utenteForm" class="form-card">
+    <h2>Prenotazione</h2>
+
+    <label>Nome</label>
+    <input formControlName="nome" type="text" required />
+    <div class="error" *ngIf="utenteForm.get('nome')?.invalid && utenteForm.get('nome')?.touched">
+      Il nome è obbligatorio.
+    </div>
+
+    <label>Cognome</label>
+    <input formControlName="cognome" type="text" required />
+    <div class="error" *ngIf="utenteForm.get('cognome')?.invalid && utenteForm.get('cognome')?.touched">
+      Il cognome è obbligatorio.
+    </div>
+
+    <label>Telefono</label>
+    <input formControlName="telefono"/>
+
+    <label>Email</label>
+    <input formControlName="email" type="email" required />
+    <div class="error" *ngIf="utenteForm.get('email')?.invalid && utenteForm.get('email')?.touched">
+      Inserisci un'email valida.
+    </div>
+
+    <div class="button-group">
+  <button type="submit" [disabled]="utenteForm.invalid || utenteForm.untouched">Invia</button>
+  <button type="button" class="annulla" (click)="onCancel()">Annulla</button>
+  <button *ngIf="isEditMode" type="button" class="elimina" (click)="onDelete()">Elimina</button>
+</div>
+  </form>
+</div>
