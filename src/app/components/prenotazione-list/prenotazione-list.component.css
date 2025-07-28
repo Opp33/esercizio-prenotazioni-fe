@@ -1,7 +1,7 @@
 .booking-list-card {
   margin: 2rem auto;
   padding: 1rem;
-  max-width: 1000px;
+  max-width: auto;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
@@ -60,8 +60,12 @@ table {
 .prenotazione-card {
   padding: 1rem;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   background: #ffffff;
+  transition: 0.3s ease;
+}
+.prenotazione-card:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
 mat-card-title {

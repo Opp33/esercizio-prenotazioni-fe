@@ -1,9 +1,10 @@
 export interface PrenotazioneModel {
-  id?: number;
+  prenotazioneId?: number;
+  giorno: string;
+  ora: string;
+  note?: string;
   nome: string;
+  cognome: string;
   email: string;
   telefono?: string;
-  giorno: string;  // yyyy-MM-dd
-  ora: string;     // HH:mm
-  note?: string;
 }

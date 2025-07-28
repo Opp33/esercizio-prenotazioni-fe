@@ -24,19 +24,11 @@ export class PrenotazioneService {
     return this.http.post<PrenotazioneModel>(this.apiUrl, prenotazione);
   }
 
-  aggiornaPrenotazione(id: number, prenotazione: PrenotazioneModel): Observable<PrenotazioneModel> {
+  modificaPrenotazione(id: number, prenotazione: PrenotazioneModel): Observable<PrenotazioneModel> {
     return this.http.put<PrenotazioneModel>(`${this.apiUrl}/${id}`, prenotazione);
   }
 
   eliminaPrenotazione(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
-  }
-
-  orderPrenotazioniByGiorno(): Observable<PrenotazioneModel[]> {
-    return this.http.get<PrenotazioneModel[]>(`${this.apiUrl}/ordinamento/giorno`);
-  }
-
-  orderPrenotazioniByNome(): Observable<PrenotazioneModel[]> {
-    return this.http.get<PrenotazioneModel[]>(`${this.apiUrl}/ordinamento/nome`);
   }
 }

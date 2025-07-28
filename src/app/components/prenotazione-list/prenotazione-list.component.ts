@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 })
 export class PrenotazioneListComponent implements OnInit {
   prenotazioni: PrenotazioneModel[] = [];
-  orderBy: string = 'giorno';
 
   constructor(private prenotazioneService: PrenotazioneService, private router: Router) {}
 
@@ -19,22 +18,12 @@ export class PrenotazioneListComponent implements OnInit {
   }
 
   loadPrenotazioni(): void {
-    if (this.orderBy === 'giorno') {
-      this.prenotazioneService.orderPrenotazioniByGiorno().subscribe((data) => {
-        this.prenotazioni = data;
-      });
-    } else if (this.orderBy === 'nome') {
-      this.prenotazioneService.orderPrenotazioniByNome().subscribe((data) => {
-        this.prenotazioni = data;
-      });
-    } else {
       this.prenotazioneService.getPrenotazioni().subscribe((data) => {
         this.prenotazioni = data;
       });
     }
-  }
 
   editPrenotazione(prenotazione: PrenotazioneModel): void {
-    this.router.navigate(['/modifica', prenotazione.id]);
+    this.router.navigate(['modifica', prenotazione.prenotazioneId]);
   }
 }

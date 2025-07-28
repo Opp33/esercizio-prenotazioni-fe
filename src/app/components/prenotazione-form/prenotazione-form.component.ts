@@ -28,6 +28,7 @@ export class PrenotazioneFormComponent implements OnInit {
 
     this.prenotazioneForm = this.fb.group({
       nome: ['', Validators.required],
+      cognome: ['', Validators.required],
       email: [
         '',
         [
@@ -56,18 +57,36 @@ export class PrenotazioneFormComponent implements OnInit {
   caricaPrenotazione(id: number): void {
     this.prenotazioneService.getPrenotazioneById(id).subscribe({
       next: (prenotazione) => {
-        this.prenotazioneForm.patchValue(prenotazione);
+        this.prenotazioneForm.patchValue({
+          nome: prenotazione.nome,
+          cognome: prenotazione.cognome,
+          email: prenotazione.email,
+          telefono: prenotazione.telefono,
+          giorno: prenotazione.giorno,
+          ora: prenotazione.ora,
+          note: prenotazione.note,
+        });
       },
     });
   }
 
   onSubmit(): void {
     if (this.prenotazioneForm.valid) {
-      const prenotazioneData: PrenotazioneModel = this.prenotazioneForm.value;
+      const formValues = this.prenotazioneForm.value;
+
+      const prenotazioneData: PrenotazioneModel = {
+        giorno: formValues.giorno,
+        ora: formValues.ora,
+        note: formValues.note,
+        nome: formValues.nome,
+        cognome: formValues.cognome,
+        email: formValues.email,
+        telefono: formValues.telefono,
+      };
 
       if (this.isEditMode) {
         this.prenotazioneService
-          .aggiornaPrenotazione(this.prenotazioneId, prenotazioneData)
+          .modificaPrenotazione(this.prenotazioneId, prenotazioneData)
           .subscribe({
             next: () => {
               alert('Prenotazione aggiornata con successo!');
@@ -90,12 +109,14 @@ export class PrenotazioneFormComponent implements OnInit {
   }
 
   onDelete(): void {
-    if (this.isEditMode && confirm('Sei sicuro di voler eliminare questa prenotazione?')) {
+    if (
+      this.isEditMode &&
+      confirm('Sei sicuro di voler eliminare questa prenotazione?')
+    ) {
       this.prenotazioneService
         .eliminaPrenotazione(this.prenotazioneId)
         .subscribe({
           next: () => {
-            alert('Prenotazione eliminata con successo!');
             this.router.navigate(['/']);
           },
         });
