@@ -1,5 +1,5 @@
-export interface UtenteModel {
-  utenteId?: number;
+export interface ClienteModel {
+  clienteId?: number;
   nome: string;
   cognome: string;
   email: string;

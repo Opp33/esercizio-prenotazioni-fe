@@ -12,16 +12,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { UtentiListComponent } from './components/utenti-list/utenti-list.component';
-import { UtentiFormComponent } from './components/utenti-form/utenti-form.component';
+import { ClientiListComponent } from './components/clienti-list/clienti-list.component';
+import { ClientiFormComponent } from './components/clienti-form/clienti-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PrenotazioneListComponent,
     PrenotazioneFormComponent,
-    UtentiListComponent,
-    UtentiFormComponent,
+    ClientiListComponent,
+    ClientiFormComponent,
   ],
   imports: [
     BrowserModule,
