@@ -34,15 +34,7 @@ export class PrenotazioneFormComponent implements OnInit {
     this.prenotazioneForm = this.fb.group({
       nome: ['', Validators.required],
       cognome: ['', Validators.required],
-      email: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(
-            /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-          ),
-        ],
-      ],
+      email: ['', [Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)]],
       telefono: [''],
       giorno: ['', Validators.required],
       ora: ['', Validators.required],
@@ -63,10 +55,10 @@ export class PrenotazioneFormComponent implements OnInit {
     this.prenotazioneService.getPrenotazioneById(id).subscribe({
       next: (prenotazione) => {
         this.prenotazioneForm.patchValue({
-          nome: prenotazione.nome,
-          cognome: prenotazione.cognome,
-          email: prenotazione.email,
-          telefono: prenotazione.telefono,
+          nome: prenotazione.cliente.nome,
+          cognome: prenotazione.cliente.cognome,
+          email: prenotazione.cliente.email,
+          telefono: prenotazione.cliente.telefono,
           giorno: prenotazione.giorno,
           ora: prenotazione.ora,
           note: prenotazione.note,
@@ -108,10 +100,12 @@ export class PrenotazioneFormComponent implements OnInit {
         giorno: formValues.giorno,
         ora: formValues.ora,
         note: formValues.note,
-        nome: formValues.nome,
-        cognome: formValues.cognome,
-        email: formValues.email,
-        telefono: formValues.telefono,
+        cliente: {
+          nome: formValues.nome,
+          cognome: formValues.cognome,
+          email: formValues.email,
+          telefono: formValues.telefono,
+        } as ClienteModel,
       };
 
       if (this.isEditMode) {

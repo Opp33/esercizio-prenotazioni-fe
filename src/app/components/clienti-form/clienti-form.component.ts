@@ -29,16 +29,8 @@ export class ClientiFormComponent {
     this.clienteForm = this.fb.group({
       nome: ['', Validators.required],
       cognome: ['', Validators.required],
-      email: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(
-            /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-          ),
-        ],
-      ],
-      telefono: [''],
+      email: ['', [Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)]],
+      telefono: ['', Validators.required],
     });
 
     this.route.paramMap.subscribe((params) => {

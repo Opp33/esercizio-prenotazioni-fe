@@ -28,17 +28,24 @@
     <!-- Input TELEFONO -->
     <div class="input-group">
       <label>Telefono</label>
-      <input formControlName="telefono" />
+      <input formControlName="telefono" type="text" required />
+      <div class="error" *ngIf="
+          clienteForm.get('telefono')?.invalid &&
+          clienteForm.get('telefono')?.touched
+        ">
+        Il numero di telefono è obbligatorio.
+      </div>
     </div>
 
     <!-- Input EMAIL -->
     <div class="input-group">
       <label>Email</label>
-      <input formControlName="email" type="email" required />
+      <input formControlName="email" />
       <div class="error" *ngIf="
-          clienteForm.get('email')?.invalid && clienteForm.get('email')?.touched
+          clienteForm.get('email')?.invalid &&
+          clienteForm.get('email')?.touched
         ">
-        Inserisci un'email valida.
+        Inserisci un indirizzo email valido.
       </div>
     </div>
 

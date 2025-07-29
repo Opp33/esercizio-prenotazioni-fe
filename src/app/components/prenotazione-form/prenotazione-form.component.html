@@ -32,28 +32,30 @@
     <!-- Input TELEFONO -->
     <div class="input-group">
       <label>Telefono</label>
-      <input formControlName="telefono" (input)="onFieldInput('telefono')" autocomplete="off" />
+      <input formControlName="telefono" required (input)="onFieldInput('telefono')" autocomplete="off" />
       <ul *ngIf="suggerimenti.length && campoAttivo === 'telefono'" class="suggestions-list">
         <li *ngFor="let c of suggerimenti" (click)="onClienteSelected(c)">
           {{ c.nome }} {{ c.cognome }} – {{ c.telefono }}
         </li>
       </ul>
+      <div class="error"
+        *ngIf=" prenotazioneForm.get('telefono')?.invalid && prenotazioneForm.get('telefono')?.touched">
+        Il numero di telefono è obbligatorio.
+      </div>
     </div>
 
     <!-- Input EMAIL -->
     <div class="input-group">
       <label>Email</label>
-      <input formControlName="email" type="email" required (input)="onFieldInput('email')" autocomplete="off" />
+      <input formControlName="email" type="email" (input)="onFieldInput('email')" autocomplete="off" />
       <ul *ngIf="suggerimenti.length && campoAttivo === 'email'" class="suggestions-list">
         <li *ngFor="let c of suggerimenti" (click)="onClienteSelected(c)">
           {{ c.nome }} {{ c.cognome }} – {{ c.email }}
         </li>
       </ul>
       <div class="error" *ngIf="
-          prenotazioneForm.get('email')?.invalid &&
-          prenotazioneForm.get('email')?.touched
-        ">
-        Inserisci un'email valida.
+          prenotazioneForm.get('email')?.invalid && prenotazioneForm.get('email')?.touched">
+        Inserisci un indirizzo email valido.
       </div>
     </div>
 

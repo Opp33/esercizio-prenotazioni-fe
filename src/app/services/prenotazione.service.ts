@@ -34,7 +34,7 @@ export class PrenotazioneService {
   }
 
   cercaClienti(term: string, field: string): Observable<ClienteModel[]> {
-  return this.http.get<ClienteModel[]>(`http://localhost:8080/api/clienti/autocomplete?term=${term}&field=${field}`);
-}
+    return this.http.get<ClienteModel[]>(`http://localhost:8080/api/clienti/autocomplete?term=${term}&field=${field}`);
+  }
 
 }
