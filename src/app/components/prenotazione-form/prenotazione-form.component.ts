@@ -36,7 +36,7 @@ export class PrenotazioneFormComponent implements OnInit {
       cognome: ['', Validators.required],
       email: ['', [Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)]],
       telefono: [''],
-      giorno: ['', Validators.required],
+      giorno: ['', [Validators.required, this.minDateValidator(this.minDate)]],
       ora: ['', Validators.required],
       note: [''],
     });
@@ -50,6 +50,18 @@ export class PrenotazioneFormComponent implements OnInit {
       }
     });
   }
+
+  minDateValidator(minDateStr: string) {
+  return (control: any) => {
+    if (!control.value) return null;
+
+    const inputDate = new Date(control.value);
+    const minDate = new Date(minDateStr);
+
+    return inputDate < minDate ? { minDate: true } : null;
+  };
+}
+
 
   caricaPrenotazione(id: number): void {
     this.prenotazioneService.getPrenotazioneById(id).subscribe({

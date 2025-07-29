@@ -63,11 +63,9 @@
     <div class="input-group">
       <label>Giorno</label>
       <input formControlName="giorno" type="date" required [min]="minDate" />
-      <div class="error" *ngIf="
-        prenotazioneForm.get('giorno')?.invalid &&
-        prenotazioneForm.get('giorno')?.touched
-      ">
-        Seleziona una data.
+      <div class="error" *ngIf=" prenotazioneForm.get('giorno')?.invalid && prenotazioneForm.get('giorno')?.touched ||
+        prenotazioneForm.get('giorno')?.errors?.['minDate'] && prenotazioneForm.get('giorno')?.touched">
+        Seleziona una data valida e non antecedente ad oggi.
       </div>
     </div>
 
@@ -75,10 +73,7 @@
     <div class="input-group">
       <label>Ora</label>
       <input formControlName="ora" type="time" required />
-      <div class="error" *ngIf="
-        prenotazioneForm.get('ora')?.invalid &&
-        prenotazioneForm.get('ora')?.touched
-      ">
+      <div class="error" *ngIf=" prenotazioneForm.get('ora')?.invalid && prenotazioneForm.get('ora')?.touched">
         Seleziona un orario.
       </div>
     </div>
