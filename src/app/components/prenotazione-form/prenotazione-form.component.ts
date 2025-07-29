@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PrenotazioneService } from '../../services/prenotazione.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PrenotazioneModel } from '../../models/prenotazione.model';
+import { ClienteModel } from '../../models/cliente.model';
 
 @Component({
   selector: 'app-prenotazione-form',
@@ -14,13 +15,17 @@ export class PrenotazioneFormComponent implements OnInit {
   minDate: string = '';
   isEditMode = false;
   prenotazioneId!: number;
+  suggerimenti: ClienteModel[] = [];
+  campoAttivo: string = '';
 
   constructor(
     private fb: FormBuilder,
     private prenotazioneService: PrenotazioneService,
     private router: Router,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private renderer: Renderer2,
+    private el: ElementRef
+  ) { }
 
   ngOnInit(): void {
     const today = new Date();
@@ -68,6 +73,31 @@ export class PrenotazioneFormComponent implements OnInit {
         });
       },
     });
+  }
+
+  onFieldInput(campo: string): void {
+    this.campoAttivo = campo;
+    const valore = this.prenotazioneForm.get(campo)?.value;
+
+    if (valore && valore.length >= 2) {
+      this.prenotazioneService.cercaClienti(valore, campo).subscribe({
+        next: (clienti) => {
+          this.suggerimenti = clienti;
+        },
+      });
+    } else {
+      this.suggerimenti = [];
+    }
+  }
+
+  onClienteSelected(cliente: ClienteModel): void {
+    this.prenotazioneForm.patchValue({
+      nome: cliente.nome,
+      cognome: cliente.cognome,
+      email: cliente.email,
+      telefono: cliente.telefono,
+    });
+    this.suggerimenti = [];
   }
 
   onSubmit(): void {

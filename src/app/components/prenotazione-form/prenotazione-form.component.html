@@ -2,46 +2,102 @@
   <form (ngSubmit)="onSubmit()" [formGroup]="prenotazioneForm" class="form-card">
     <h2>Prenotazione</h2>
 
-    <label>Nome</label>
-    <input formControlName="nome" type="text" required />
-    <div class="error" *ngIf="prenotazioneForm.get('nome')?.invalid && prenotazioneForm.get('nome')?.touched">
-      Il nome è obbligatorio.
+    <!-- Input NOME -->
+    <div class="input-group">
+      <label>Nome</label>
+      <input formControlName="nome" type="text" required (input)="onFieldInput('nome')" autocomplete="off" />
+      <ul *ngIf="suggerimenti.length && campoAttivo === 'nome'" class="suggestions-list">
+        <li *ngFor="let c of suggerimenti" (click)="onClienteSelected(c)"> {{ c.nome }} {{ c.cognome }} – {{ c.email }}
+        </li>
+      </ul>
+      <div class="error" *ngIf=" prenotazioneForm.get('nome')?.invalid && prenotazioneForm.get('nome')?.touched">
+        Il nome è obbligatorio.
+      </div>
     </div>
 
-    <label>Cognome</label>
-    <input formControlName="cognome" type="text" required />
-    <div class="error" *ngIf="prenotazioneForm.get('cognome')?.invalid && prenotazioneForm.get('cognome')?.touched">
-      Il cognome è obbligatorio.
+    <!-- Input COGNOME -->
+    <div class="input-group">
+      <label>Cognome</label>
+      <input formControlName="cognome" type="text" required (input)="onFieldInput('cognome')" autocomplete="off" />
+      <ul *ngIf="suggerimenti.length && campoAttivo === 'cognome'" class="suggestions-list">
+        <li *ngFor="let c of suggerimenti" (click)="onClienteSelected(c)">
+          {{ c.nome }} {{ c.cognome }} – {{ c.email }}
+        </li>
+      </ul>
+      <div class="error" *ngIf=" prenotazioneForm.get('cognome')?.invalid && prenotazioneForm.get('cognome')?.touched">
+        Il cognome è obbligatorio.
+      </div>
     </div>
 
-    <label>Telefono</label>
-    <input formControlName="telefono"/>
-
-    <label>Email</label>
-    <input formControlName="email" type="email" required />
-    <div class="error" *ngIf="prenotazioneForm.get('email')?.invalid && prenotazioneForm.get('email')?.touched">
-      Inserisci un'email valida.
+    <!-- Input TELEFONO -->
+    <div class="input-group">
+      <label>Telefono</label>
+      <input formControlName="telefono" (input)="onFieldInput('telefono')" autocomplete="off" />
+      <ul *ngIf="suggerimenti.length && campoAttivo === 'telefono'" class="suggestions-list">
+        <li *ngFor="let c of suggerimenti" (click)="onClienteSelected(c)">
+          {{ c.nome }} {{ c.cognome }} – {{ c.telefono }}
+        </li>
+      </ul>
     </div>
 
-    <label>Giorno</label>
-    <input formControlName="giorno" type="date" required [min]="minDate"/>
-    <div class="error" *ngIf="prenotazioneForm.get('giorno')?.invalid && prenotazioneForm.get('giorno')?.touched">
-      Seleziona una data.
+    <!-- Input EMAIL -->
+    <div class="input-group">
+      <label>Email</label>
+      <input formControlName="email" type="email" required (input)="onFieldInput('email')" autocomplete="off" />
+      <ul *ngIf="suggerimenti.length && campoAttivo === 'email'" class="suggestions-list">
+        <li *ngFor="let c of suggerimenti" (click)="onClienteSelected(c)">
+          {{ c.nome }} {{ c.cognome }} – {{ c.email }}
+        </li>
+      </ul>
+      <div class="error" *ngIf="
+          prenotazioneForm.get('email')?.invalid &&
+          prenotazioneForm.get('email')?.touched
+        ">
+        Inserisci un'email valida.
+      </div>
     </div>
 
-    <label>Ora</label>
-    <input formControlName="ora" type="time" required />
-    <div class="error" *ngIf="prenotazioneForm.get('ora')?.invalid && prenotazioneForm.get('ora')?.touched">
-      Seleziona un orario.
+    <!-- Input GIORNO -->
+    <div class="input-group">
+      <label>Giorno</label>
+      <input formControlName="giorno" type="date" required [min]="minDate" />
+      <div class="error" *ngIf="
+        prenotazioneForm.get('giorno')?.invalid &&
+        prenotazioneForm.get('giorno')?.touched
+      ">
+        Seleziona una data.
+      </div>
     </div>
 
-    <label>Note</label>
-    <textarea formControlName="note" rows="3"></textarea>
+    <!-- Input ORA -->
+    <div class="input-group">
+      <label>Ora</label>
+      <input formControlName="ora" type="time" required />
+      <div class="error" *ngIf="
+        prenotazioneForm.get('ora')?.invalid &&
+        prenotazioneForm.get('ora')?.touched
+      ">
+        Seleziona un orario.
+      </div>
+    </div>
 
+    <!-- Input NOTE -->
+    <div class="input-group">
+      <label>Note</label>
+      <textarea formControlName="note" rows="3"></textarea>
+    </div>
+
+    <!-- BOTTONI -->
     <div class="button-group">
-  <button type="submit" [disabled]="prenotazioneForm.invalid || prenotazioneForm.untouched">Invia</button>
-  <button type="button" class="annulla" (click)="onCancel()">Annulla</button>
-  <button *ngIf="isEditMode" type="button" class="elimina" (click)="onDelete()">Elimina</button>
-</div>
+      <button type="submit" [disabled]="prenotazioneForm.invalid || prenotazioneForm.untouched">
+        Invia
+      </button>
+      <button type="button" class="annulla" (click)="onCancel()">
+        Annulla
+      </button>
+      <button *ngIf="isEditMode" type="button" class="elimina" (click)="onDelete()">
+        Elimina
+      </button>
+    </div>
   </form>
 </div>

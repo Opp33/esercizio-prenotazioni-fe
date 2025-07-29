@@ -11,19 +11,25 @@ import { Router } from '@angular/router';
 export class PrenotazioneListComponent implements OnInit {
   prenotazioni: PrenotazioneModel[] = [];
 
-  constructor(private prenotazioneService: PrenotazioneService, private router: Router) {}
+  constructor(
+    private prenotazioneService: PrenotazioneService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loadPrenotazioni();
   }
 
   loadPrenotazioni(): void {
-      this.prenotazioneService.getPrenotazioni().subscribe((data) => {
-        this.prenotazioni = data;
-      });
-    }
+    this.prenotazioneService.getPrenotazioni().subscribe((data) => {
+      this.prenotazioni = data;
+    });
+  }
 
   editPrenotazione(prenotazione: PrenotazioneModel): void {
-    this.router.navigate(['modifica-prenotazione', prenotazione.prenotazioneId]);
+    this.router.navigate([
+      'modifica-prenotazione',
+      prenotazione.prenotazioneId,
+    ]);
   }
 }

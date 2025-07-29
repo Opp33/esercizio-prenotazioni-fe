@@ -2,31 +2,57 @@
   <form (ngSubmit)="onSubmit()" [formGroup]="clienteForm" class="form-card">
     <h2>Cliente</h2>
 
-    <label>Nome</label>
-    <input formControlName="nome" type="text" required />
-    <div class="error" *ngIf="clienteForm.get('nome')?.invalid && clienteForm.get('nome')?.touched">
-      Il nome è obbligatorio.
+    <!-- Input NOME -->
+    <div class="input-group">
+      <label>Nome</label>
+      <input formControlName="nome" type="text" required />
+      <div class="error" *ngIf="
+          clienteForm.get('nome')?.invalid && clienteForm.get('nome')?.touched
+        ">
+        Il nome è obbligatorio.
+      </div>
     </div>
 
-    <label>Cognome</label>
-    <input formControlName="cognome" type="text" required />
-    <div class="error" *ngIf="clienteForm.get('cognome')?.invalid && clienteForm.get('cognome')?.touched">
-      Il cognome è obbligatorio.
+    <!-- Input COGNOME -->
+    <div class="input-group">
+      <label>Cognome</label>
+      <input formControlName="cognome" type="text" required />
+      <div class="error" *ngIf="
+          clienteForm.get('cognome')?.invalid &&
+          clienteForm.get('cognome')?.touched
+        ">
+        Il cognome è obbligatorio.
+      </div>
     </div>
 
-    <label>Telefono</label>
-    <input formControlName="telefono"/>
-
-    <label>Email</label>
-    <input formControlName="email" type="email" required />
-    <div class="error" *ngIf="clienteForm.get('email')?.invalid && clienteForm.get('email')?.touched">
-      Inserisci un'email valida.
+    <!-- Input TELEFONO -->
+    <div class="input-group">
+      <label>Telefono</label>
+      <input formControlName="telefono" />
     </div>
 
+    <!-- Input EMAIL -->
+    <div class="input-group">
+      <label>Email</label>
+      <input formControlName="email" type="email" required />
+      <div class="error" *ngIf="
+          clienteForm.get('email')?.invalid && clienteForm.get('email')?.touched
+        ">
+        Inserisci un'email valida.
+      </div>
+    </div>
+
+    <!-- BOTTONI -->
     <div class="button-group">
-  <button type="submit" [disabled]="clienteForm.invalid || clienteForm.untouched">Invia</button>
-  <button type="button" class="annulla" (click)="onCancel()">Annulla</button>
-  <button *ngIf="isEditMode" type="button" class="elimina" (click)="onDelete()">Elimina</button>
-</div>
+      <button type="submit" [disabled]="clienteForm.invalid || clienteForm.untouched">
+        Invia
+      </button>
+      <button type="button" class="annulla" (click)="onCancel()">
+        Annulla
+      </button>
+      <button *ngIf="isEditMode" type="button" class="elimina" (click)="onDelete()">
+        Elimina
+      </button>
+    </div>
   </form>
 </div>

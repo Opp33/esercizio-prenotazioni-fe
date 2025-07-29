@@ -15,7 +15,8 @@
     </div>
 
     <div class="grid-container" *ngIf="prenotazioni.length > 0">
-      <mat-card class="prenotazione-card" *ngFor="let p of prenotazioni" (click)="editPrenotazione(p)" style="cursor: pointer;">
+      <mat-card class="prenotazione-card" *ngFor="let p of prenotazioni" (click)="editPrenotazione(p)"
+        style="cursor: pointer;">
         <mat-card-header>
           <mat-card-title>{{ p.giorno | date : "dd/MM/yyyy" }}</mat-card-title>
           <mat-card-subtitle>{{ p.ora }}</mat-card-subtitle>
